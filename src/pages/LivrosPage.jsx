@@ -1,13 +1,13 @@
 import { useEffect, useState, useCallback } from 'react';
 import * as livroService from '../services/livroService';
-import { 
-  Plus, 
-  Search, 
-  Edit2, 
-  Trash2, 
-  X, 
-  BookOpen, 
-  User, 
+import {
+  Plus,
+  Search,
+  Edit2,
+  Trash2,
+  X,
+  BookOpen,
+  User,
   Hash,
   ChevronLeft,
   ChevronRight
@@ -97,7 +97,7 @@ export function LivrosPage() {
 
   const buscar = async () => {
     if (!buscaId.trim()) return carregar();
-    
+
     setIsLoading(true);
     try {
       const d = await livroService.obterLivro(buscaId.trim());
@@ -186,7 +186,7 @@ export function LivrosPage() {
                   </div>
                   <div className="badge badge--aluno">#{l.id}</div>
                 </div>
-                
+
                 <div className="list-card__row">
                   <span>Disponível para empréstimo em breve.</span>
                 </div>
@@ -211,21 +211,21 @@ export function LivrosPage() {
 
           {totalPaginas > 1 && (
             <div className="pagination" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem', padding: '0 0.5rem' }}>
-              <button 
-                onClick={() => mudarPagina('ant')} 
+              <button
+                onClick={() => mudarPagina('ant')}
                 disabled={paginaAtual === 1}
                 className="btn btn--secondary btn--sm"
                 style={{ padding: '0.5rem' }}
               >
                 <ChevronLeft size={20} />
               </button>
-              
+
               <span className="text-muted" style={{ fontSize: '0.9rem', fontWeight: '500' }}>
                 Página {paginaAtual} de {totalPaginas}
               </span>
 
-              <button 
-                onClick={() => mudarPagina('prox')} 
+              <button
+                onClick={() => mudarPagina('prox')}
                 disabled={paginaAtual === totalPaginas}
                 className="btn btn--secondary btn--sm"
                 style={{ padding: '0.5rem' }}
@@ -291,10 +291,10 @@ export function LivrosPage() {
         <div className="overlay" onClick={() => setConfirmacao(null)}>
           <div className="modal" style={{ maxWidth: '360px' }} onClick={e => e.stopPropagation()}>
             <div className="modal-body" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
-              <div style={{ 
-                width: '64px', 
-                height: '64px', 
-                borderRadius: '32px', 
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '32px',
                 background: 'var(--danger-soft)',
                 color: 'var(--danger)',
                 display: 'flex',
@@ -311,8 +311,8 @@ export function LivrosPage() {
               <button className="btn btn--secondary" style={{ flex: 1 }} onClick={() => setConfirmacao(null)}>
                 Voltar
               </button>
-              <button 
-                className="btn btn--danger" 
+              <button
+                className="btn btn--danger"
                 style={{ flex: 1 }}
                 onClick={confirmacao.action}
               >
@@ -324,4 +324,4 @@ export function LivrosPage() {
       )}
     </div>
   );
-}
+}
