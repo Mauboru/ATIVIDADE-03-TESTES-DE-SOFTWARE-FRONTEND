@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff } from 'lucide-react';
 
 export function RegisterPage() {
   const { register, isAuthenticated } = useAuth();
@@ -8,6 +9,8 @@ export function RegisterPage() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [tipo, setTipo] = useState('aluno');
+  const [mostrarSenha, setMostrarSenha] = useState(false);
   const [erro, setErro] = useState('');
   const [ok, setOk] = useState('');
 
@@ -20,7 +23,7 @@ export function RegisterPage() {
     setErro('');
     setOk('');
     try {
-      await register(nome, email, senha);
+      await register(nome, email, senha, tipo);
       setOk('Conta criada. Indo para o login…');
       setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
@@ -57,16 +60,38 @@ export function RegisterPage() {
             />
           </div>
           <div className="form-field">
-            <label htmlFor="reg-senha">Senha</label>
-            <input
-              id="reg-senha"
-              type="password"
-              autoComplete="new-password"
-              minLength={4}
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
+            <label htmlFor="reg-tipo">Tipo de Perfil</label>
+            <select
+              id="reg-tipo"
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
               required
-            />
+            >
+              <option value="aluno">Aluno</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+          <div className="form-field">
+            <label htmlFor="reg-senha">Senha</label>
+            <div className="password-wrapper">
+              <input
+                id="reg-senha"
+                type={mostrarSenha ? 'text' : 'password'}
+                autoComplete="new-password"
+                minLength={4}
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                aria-label={mostrarSenha ? 'Ocultar senha' : 'Ver senha'}
+              >
+                {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
           {erro && (
             <p className="alert alert--error" role="alert">
