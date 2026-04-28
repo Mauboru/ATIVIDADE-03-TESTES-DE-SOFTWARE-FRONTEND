@@ -4,4 +4,6 @@ dist
 .env.local
 *.local
 
-test/
+playwright-report/
+test-results/
+.vscode

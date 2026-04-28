@@ -34,7 +34,7 @@ export function LivrosPage() {
       const data = await livroService.listarLivros();
       setLivros(Array.isArray(data) ? data : (data ? [data] : []));
       setErro('');
-      setPaginaAtual(1); // Volta para a primeira página ao carregar tudo
+      setPaginaAtual(1);
     } catch (e) {
       setErro('Não foi possível carregar os livros.');
     } finally {
@@ -258,6 +258,7 @@ export function LivrosPage() {
                   <label>Título do Livro</label>
                   <input
                     placeholder="Ex: Dom Casmurro"
+                    name="titulo"
                     value={form.titulo}
                     onChange={e => setForm({ ...form, titulo: e.target.value })}
                     required
@@ -268,6 +269,7 @@ export function LivrosPage() {
                   <label>Autor</label>
                   <input
                     placeholder="Ex: Machado de Assis"
+                    name="autor"
                     value={form.autor}
                     onChange={e => setForm({ ...form, autor: e.target.value })}
                     required
